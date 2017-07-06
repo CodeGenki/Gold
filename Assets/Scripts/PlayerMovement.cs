@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private Rigidbody2D rbody;
     private Animator anim;
-    private int run = 2;
+    private int run = 1;
 
     private Vector2 downVector = new Vector2(0, -1);
     private Vector2 upVector = new Vector2(0, 1);
@@ -38,11 +38,11 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.Z))
         {
-            run = 3;
+            run = 2;
         }
         else
         {
-            run = 2;
+            run = 1;
         }
 
         Vector2 movement_vector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

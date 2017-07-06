@@ -87,8 +87,8 @@ public class TextBoxManager : MonoBehaviour
     {
         isActive = false;
         textBox.SetActive(false);
-
-        player.canMove = true;
+        if(player != null)
+            player.canMove = true;
     }
 
     public void ReloadScript(TextAsset theText)

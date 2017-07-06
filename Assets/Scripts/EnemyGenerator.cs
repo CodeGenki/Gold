@@ -41,12 +41,14 @@ public class EnemyGenerator : MonoBehaviour {
         if (readyForBattle)
         {
             int x = rand.Next(100);
-            if (x >= 0 && x < 30)   //30% chance for battle
+            if (x >= 0 && x < 2)   //2% chance for battle per frame
             {
+                
                 level = (int)(GameControl.control.level * (rand.NextDouble() + 0.5) * 1.5f);
                 atk = (int)(((rand.NextDouble()) + 1) * 5 * level);
                 def = (int)(((rand.NextDouble()) + 1) * 2 * level);
                 hp = (int)(((rand.NextDouble()) + 1) * 30 * level);
+                readyForBattle = false;
                 sprite = (EnemySprite)rand.Next(3);
                 EnterBattleScene();
             }
@@ -71,6 +73,6 @@ public class EnemyGenerator : MonoBehaviour {
 
     private void EnterBattleScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 }

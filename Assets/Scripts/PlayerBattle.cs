@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerBattle : MonoBehaviour {
 
     public static bool playerTurn;
-    public GameControl player;
-    public EnemyGenerator enemy;
-
+    private GameControl player;
+    private EnemyGenerator enemy;
     public SelectionManager atkType;
     public SelectionManager skillType;
 
@@ -16,16 +15,20 @@ public class PlayerBattle : MonoBehaviour {
     void Start () {
         atkType = new SelectionManager();
         skillType = new SelectionManager();
+        DontDestroyOnLoad(gameObject);
+        player = GetComponent<GameControl>();
+        enemy = GetComponent<EnemyGenerator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (playerTurn && enemy.hp > 0)
         {
+            Debug.Log("Player turn started");
             atkType.startSelection = true;
             if(atkType.startSelection == false)
             {
-                if(atkType.selectedItem == 0)       // Regular attack
+                if(atkType.chosen == 0)       // Regular attack
                 {
                     // atk animation
                     if (player.atk >= enemy.def)
@@ -33,7 +36,7 @@ public class PlayerBattle : MonoBehaviour {
                     else
                         enemy.hp--;
                 }
-                else if(atkType.selectedItem == 1)
+                else if(atkType.chosen == 1)
                 {
                     skillType.startSelection = true;
                     if(skillType.startSelection == false)
@@ -41,20 +44,21 @@ public class PlayerBattle : MonoBehaviour {
                         // do selection stuff here
                     }
                 }
-                else if(atkType.selectedItem == 2)
+                else if(atkType.chosen == 2)
                 {
                     // send message and change scene
+                    Debug.Log("Here");
                     SceneManager.LoadScene(0);
                 }
             }
         }
-        if(enemy.hp <= 0)
+        if(!playerTurn && enemy != null && enemy.hp <= 0)
         {
             // message that you defeated enemy.
-            player.exp += enemy.level * 5;
+            player.exp += enemy.level * 8;
             SceneManager.LoadScene(0);
         }
-        else if(player.gold < 0)
+        else if(player != null && player.gold < 0)
         {
             // game over
         }

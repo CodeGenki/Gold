@@ -15,6 +15,7 @@ public class SelectionManager : MonoBehaviour {
     public bool isActive;
     public bool startSelection;
     public int selectedItem;
+    public int chosen;
     public bool selectionComplete;
 
     public enum SelectionModes
@@ -91,6 +92,8 @@ public class SelectionManager : MonoBehaviour {
                 startSelection = false;
                 DisableTextBox();
                 Debug.Log("Destroyed text box");
+                chosen = selectedItem;
+                selectedItem = 0;
                 DoAction();
                 selectionComplete = true;
             }
@@ -101,20 +104,21 @@ public class SelectionManager : MonoBehaviour {
     {
         isActive = true;
         textBox.SetActive(true);
-        player.canMove = false;
+        if(player != null)
+          player.canMove = false;
     }
 
     public void DisableTextBox()
     {
         isActive = false;
         textBox.SetActive(false);
-
-        player.canMove = true;
+        if(player != null)
+            player.canMove = true;
     }
 
     public void DoAction()
     {
-        Debug.Log("You selected " + textLines[selectedItem]);
+        Debug.Log("You selected " + textLines[chosen]);
     }
 
     public void LoadTextFile(string fileName)

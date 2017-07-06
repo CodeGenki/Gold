@@ -12,8 +12,12 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //enemy = new EnemyGenerator();
         enemyTurn = false;
         isDead = false;
+        DontDestroyOnLoad(gameObject);
+        enemy = GetComponent<EnemyGenerator>();
+        player = GetComponent<GameControl>();
 	}
 	
 	// Update is called once per frame
@@ -28,7 +32,7 @@ public class Enemy : MonoBehaviour {
             enemyTurn = false;
             PlayerBattle.playerTurn = true;
         }
-        if(enemy.hp <= 0)
+        if(enemy != null && enemy.hp <= 0)
         {
             // Die animation
             isDead = true;
