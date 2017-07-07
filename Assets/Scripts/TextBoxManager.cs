@@ -68,7 +68,8 @@ public class TextBoxManager : MonoBehaviour
         if(currentLine > endAtLine)
         {
             DisableTextBox();
-            activate.busyChat = false;
+            if(activate != null)
+                activate.busyChat = false;
             Debug.Log("At end of speech");
         }
     }

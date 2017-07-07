@@ -15,8 +15,12 @@ public class GameControl : MonoBehaviour {
     public int def = 0;
     public int level = 0;
 
+    public PlayerMovement player;
+    public Vector2 playerPosition;
+
 	// Use this for initialization
 	void Start () {
+        player = FindObjectOfType<PlayerMovement>();
         if (control == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -36,7 +40,8 @@ public class GameControl : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-		
+        if(player != null)
+            playerPosition = player.transform.position;
 	}
 
     public void Save()
@@ -50,6 +55,7 @@ public class GameControl : MonoBehaviour {
         data.atk = atk;
         data.def = def;
         data.level = level;
+
 
         bf.Serialize(file, data);   // Write container to file
         file.Close();

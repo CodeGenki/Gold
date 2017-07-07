@@ -14,6 +14,7 @@ public class EnemyGenerator : MonoBehaviour {
     public int hp = 0;
     private System.Random rand;
     private bool readyForBattle;
+    public PlayerMovement player;
 
     public enum EnemySprite
     {
@@ -24,6 +25,7 @@ public class EnemyGenerator : MonoBehaviour {
     public EnemySprite sprite;
 	// Use this for initialization
 	void Start () {
+        player = FindObjectOfType<PlayerMovement>();
         if (enemyControl == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -38,12 +40,11 @@ public class EnemyGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (readyForBattle)
+        if (readyForBattle && player.anim.GetBool("isWalking"))
         {
             int x = rand.Next(100);
             if (x >= 0 && x < 2)   //2% chance for battle per frame
             {
-                
                 level = (int)(GameControl.control.level * (rand.NextDouble() + 0.5) * 1.5f);
                 atk = (int)(((rand.NextDouble()) + 1) * 5 * level);
                 def = (int)(((rand.NextDouble()) + 1) * 2 * level);

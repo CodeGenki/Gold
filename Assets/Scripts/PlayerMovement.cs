@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
+    public static PlayerMovement control;
+    
     private Rigidbody2D rbody;
-    private Animator anim;
+    public Animator anim;
     private int run = 1;
 
     private Vector2 downVector = new Vector2(0, -1);
@@ -25,6 +27,16 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if (control == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            control = this;
+        }
+        else if (control != this)
+        {
+            Destroy(gameObject);
+        }
+
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();   
 	}

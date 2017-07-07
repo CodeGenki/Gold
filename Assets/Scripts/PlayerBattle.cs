@@ -13,8 +13,8 @@ public class PlayerBattle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        atkType = new SelectionManager();
-        skillType = new SelectionManager();
+        atkType = GetComponent<SelectionManager>();
+        skillType = GetComponent<SelectionManager>();
         DontDestroyOnLoad(gameObject);
         player = GetComponent<GameControl>();
         enemy = GetComponent<EnemyGenerator>();
@@ -26,30 +26,27 @@ public class PlayerBattle : MonoBehaviour {
         {
             Debug.Log("Player turn started");
             atkType.startSelection = true;
-            if(atkType.startSelection == false)
+            if(atkType.chosen == 0)       // Regular attack
             {
-                if(atkType.chosen == 0)       // Regular attack
+                // atk animation
+                if (player.atk >= enemy.def)
+                    enemy.hp -= player.atk - enemy.def;
+                else
+                    enemy.hp--;
+            }
+            else if(atkType.chosen == 1)
+            {
+                skillType.startSelection = true;
+                if(skillType.startSelection == false)
                 {
-                    // atk animation
-                    if (player.atk >= enemy.def)
-                        enemy.hp -= player.atk - enemy.def;
-                    else
-                        enemy.hp--;
+                    // do selection stuff here
                 }
-                else if(atkType.chosen == 1)
-                {
-                    skillType.startSelection = true;
-                    if(skillType.startSelection == false)
-                    {
-                        // do selection stuff here
-                    }
-                }
-                else if(atkType.chosen == 2)
-                {
-                    // send message and change scene
-                    Debug.Log("Here");
-                    SceneManager.LoadScene(0);
-                }
+            }
+            else if(atkType.chosen == 2)
+            {
+                // send message and change scene
+                Debug.Log("Here");
+                SceneManager.LoadScene(0);
             }
         }
         if(!playerTurn && enemy != null && enemy.hp <= 0)

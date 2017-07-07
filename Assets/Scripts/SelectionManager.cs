@@ -29,6 +29,7 @@ public class SelectionManager : MonoBehaviour {
         player = FindObjectOfType<PlayerMovement>();
         player = FindObjectOfType<PlayerMovement>();
         selectedItem = 0;
+        chosen = 100;
 
         if (textFile != null)
         {
@@ -51,7 +52,7 @@ public class SelectionManager : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (startSelection)
         {
             EnableTextBox();
