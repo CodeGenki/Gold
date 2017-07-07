@@ -536,6 +536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atkText: {fileID: 4900000, guid: 0f6cf159547e0bc46bf786a94bba1ccb, type: 3}
+  enemyAtkText: {fileID: 4900000, guid: be4d73b70cba9f24599c8946486c69aa, type: 3}
+  generalText: {fileID: 4900000, guid: 2f656c1acf525bb4b89104914f9411c8, type: 3}
   startLine: 0
   endLine: 0
   atkType: {fileID: 1268017219}
@@ -807,8 +809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891a7d8a9d512bd4ca79fff155452cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkType: {fileID: 1507850424}
-  skillType: {fileID: 0}
 --- !u!1 &1801104057
 GameObject:
   m_ObjectHideFlags: 0

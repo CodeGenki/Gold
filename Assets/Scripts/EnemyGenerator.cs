@@ -35,11 +35,11 @@ public class EnemyGenerator : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        rand = new System.Random();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        rand = new System.Random();
         if (readyForBattle && player.anim.GetBool("isWalking"))
         {
             int x = rand.Next(100);

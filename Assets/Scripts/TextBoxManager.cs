@@ -23,6 +23,8 @@ public class TextBoxManager : MonoBehaviour
     public ActivateTextAtLine activate;
     public SelectionManager selection;
 
+    public bool isDoneTalking;
+
     // Use this for initialization
     void Start()
     {
@@ -67,6 +69,7 @@ public class TextBoxManager : MonoBehaviour
         }
         if(currentLine > endAtLine)
         {
+            isDoneTalking = true;
             DisableTextBox();
             if(activate != null)
                 activate.busyChat = false;
@@ -76,6 +79,7 @@ public class TextBoxManager : MonoBehaviour
 
     public void EnableTextBox()
     {
+        isDoneTalking = false;
         isActive = true;
         textBox.SetActive(true);
         if (stopPlayerMovement)
