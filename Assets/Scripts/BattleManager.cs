@@ -103,7 +103,7 @@ public class BattleManager : MonoBehaviour {
             else
                 player.gold -= 1;
             enemyTurn = false;
-            PlayerBattle.playerTurn = true;
+            playerTurn = true;
         }
         if(enemy != null && enemy.hp <= 0)
         {
